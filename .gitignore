@@ -1,0 +1,7 @@
+*.o
+extract_frames
+measure_seams
+measure_flicker
+blend_seam
+preview_hero
+.DS_Store

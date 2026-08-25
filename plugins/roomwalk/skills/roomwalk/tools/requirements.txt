@@ -1,0 +1,5 @@
+# Кадровые инструменты. Ставится один раз, работает на macOS, Windows и Linux:
+#   python3 -m pip install --user -r requirements.txt
+pillow>=9
+numpy>=1.21
+imageio-ffmpeg>=0.4
