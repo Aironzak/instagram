@@ -29,9 +29,10 @@
 > always fails on an RFC 9207 issuer mismatch. You are ready when `generate_image` and
 > `generate_video` appear in the session.
 >
-> **3 — Run `/roomwalk:start`** and ask exactly one question: the link to the business's website.
-> Ask nothing else — what they sell, how many photographs they have, their prices and their claim
-> are all read off that site. Then come back with one message: the stops, **three ways the room
+> **3 — Run `/roomwalk:start`** and ask exactly one question, leaving both doors open: what site
+> they want, **or** a link to the one they have. With a link, everything — what they sell, their
+> prices, their claim — is read off that site. Without one, ask only what the business is and for
+> their photographs; nothing is built without photographs. Then come back with one message: the stops, **three ways the room
 > could look**, the one you recommend and why, and the cost. They pick a number. That is the only
 > creative decision they make, and after it you build without asking anything else.
 >
@@ -41,7 +42,7 @@
 >
 > **Your first message back should be one line**, not an essay:
 > *«Ставлю плагин и подключаю Higgsfield — сейчас дам ссылку для входа.»* — or, if everything is
-> already in place, *«Пришлите ссылку на сайт — я посмотрю, чем вы занимаетесь, и предложу план.»*
+> already in place, *«Расскажите, какой сайт хотите сделать, или пришлите ссылку на нынешний.»*
 >
 > **Never generate the outcome being sold** — no faces, bodies or skin, no before-and-after, no
 > certificates, no client branding. Generate the room; their photographs carry the result.

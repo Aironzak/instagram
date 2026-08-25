@@ -84,11 +84,12 @@ You are ready when `generate_image` and `generate_video` are in the session.
 /roomwalk:start
 ```
 
-It asks for **the link to the business's website** — and asks nothing else. Do not ask what the
-business does, what tone they want, or which sections to include. All of that is read off the
-site in the next step: the categories, how many photographs sit behind each, the prices, the one
-line they repeat about themselves. Asking someone to describe their own site is the fastest way
-to lose them.
+It asks **one** question and leaves both doors open: what site they want, or a link to the one
+they already have. With a link, everything else — the categories, how many photographs sit behind
+each, the prices, the line they repeat about themselves — is read off that site, so ask nothing
+more; making someone describe their own site is the fastest way to lose them. Without a link, ask
+only two things in one message: what the business is, in a sentence, and their photographs of real
+work. Photographs are not optional.
 
 Then it comes back with **one** message: the stops it worked out from the site, **three ways
 the room could look**, which one it recommends and why, and the cost. They answer with a
@@ -105,7 +106,7 @@ Short. Not a summary of this repository, not a list of what you are about to rea
 
 …or, if everything is already in place, just the one question the skill opens with:
 
-> Пришлите ссылку на сайт — я посмотрю, чем вы занимаетесь, и предложу план.
+> Расскажите, какой сайт хотите сделать, или пришлите ссылку на нынешний — посмотрю, чем вы занимаетесь, и предложу план.
 
 ---
 
@@ -231,10 +232,12 @@ claude plugin install roomwalk@roomwalk
 /roomwalk:start
 ```
 
-Он спрашивает **ссылку на сайт** — и больше ничего. Не спрашивайте, чем занимается бизнес,
-какой нужен тон и какие разделы включить: всё это читается с самого сайта — категории,
-сколько фотографий стоит за каждой, цены и та фраза, которую они о себе повторяют. Просить
-человека описать свой же сайт — самый быстрый способ его потерять.
+Он задаёт **один** вопрос и оставляет открытыми обе двери: какой сайт человек хочет сделать —
+или ссылка на нынешний. Если ссылка есть, всё остальное читается с самого сайта: категории,
+сколько фотографий стоит за каждой, цены и та фраза, которую они о себе повторяют, — и больше
+спрашивать нечего; просить человека описать свой же сайт — самый быстрый способ его потерять.
+Если ссылки нет, спросите одним сообщением ровно две вещи: чем занимается бизнес, в одну фразу,
+и фотографии реальных работ. Фотографии обязательны.
 
 Дальше он возвращается **одним** сообщением: остановки, которые вывел с сайта, **три
 варианта, как может выглядеть помещение**, какой из них советует и почему, и цена. Человек
@@ -256,7 +259,7 @@ claude plugin install roomwalk@roomwalk
 
 …либо, если всё уже на месте, тот самый единственный вопрос, с которого начинается навык:
 
-> Пришлите ссылку на сайт — я посмотрю, чем вы занимаетесь, и предложу план.
+> Расскажите, какой сайт хотите сделать, или пришлите ссылку на нынешний — посмотрю, чем вы занимаетесь, и предложу план.
 
 ## Что нужно на машине
 

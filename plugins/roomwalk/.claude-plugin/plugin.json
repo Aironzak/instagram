@@ -1,7 +1,7 @@
 {
   "name": "roomwalk",
   "description": "Two scroll-driven heroes built through the Higgsfield MCP. roomwalk: send a link to any business's site and it reads the categories, proposes a walk through one generated space and builds it, with the business's own photographs surfacing at each stop. exploded: one product on pure black that comes apart as you scroll — a single unbroken shot, so there are no joins at all. Frame tools are AVFoundation, no ffmpeg.",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "author": {
     "name": "Aironzak"
   },

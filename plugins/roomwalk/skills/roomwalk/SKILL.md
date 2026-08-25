@@ -98,16 +98,25 @@ This holds for everything downstream: the opening question, the plan, the cost, 
 you put on the page, and the footer. A Russian joiner reading an English plan for their own
 website is being handed someone else's document.
 
-### 1 · Ask for the link, and ask for nothing else
+### 1 · Ask one question, and ask nothing else
 
-Open with one line, in their language. In Russian that is:
+Open with one line, in their language, and leave both doors open — some people have a site
+to rebuild, some are starting from nothing. In Russian that is:
 
-> *Пришлите ссылку на сайт — я посмотрю, чем вы занимаетесь, и предложу план.*
-> *(Send me the link to the site — I'll read it and propose a plan.)*
+> *Расскажите, какой сайт хотите сделать, или пришлите ссылку на нынешний — посмотрю,
+> чем вы занимаетесь, и предложу план.*
+> *(Tell me what site you want, or send me the link to the current one — I'll look and
+> propose a plan.)*
 
-Do not ask what the business does, what tone they want, or which sections to include.
-Everything is usually on the site already, and asking someone to describe their own site
-is the fastest way to lose them.
+**With a link**, read the site (step 2) and ask nothing more: what they sell, their prices,
+their claim are all there, and asking someone to describe their own site is the fastest way
+to lose them.
+
+**Without a link**, you need two things and only two: what the business is, in a sentence,
+and **their photographs** of real work. Ask for both in one message, not one at a time.
+Photographs are not optional — they are the proof layer, and without them there is nothing
+to surface at the stops. Counts and prices then come from whatever they tell you; quote only
+what they actually said, and leave the number out rather than inventing one.
 
 ### 2 · Read the site
 
@@ -134,7 +143,7 @@ Then download 8–10 photographs per category into `assets/catalog/<slug>/` and 
 source site. The counter matters: "все 155 →" is a different promise from "все 8 →".
 
 **If the site cannot be read** — JavaScript-only shell, auth wall, dead domain, a one-pager
-with no gallery — say so plainly and ask for exactly two things:
+with no gallery — say so plainly and fall back to the no-link route from step 1:
 
 > *Не смог прочитать сайт — там нечего разобрать. Расскажите в двух словах, чем занимаетесь,
 > и пришлите несколько фотографий.*
