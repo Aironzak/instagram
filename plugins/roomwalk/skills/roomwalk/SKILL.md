@@ -87,6 +87,12 @@ several different things in the place they belong.
 
 ## The pipeline
 
+> **Before generating anything, read [`higgsfield.md`](higgsfield.md).** It holds measured
+> prices, ready-made motion presets and the right order of operations (deflicker → upscale →
+> background removal → slicing). Half of what this file describes as hand work exists in the
+> Higgsfield catalogue already, and cheaper.
+
+
 ### 0 · Speak their language
 
 **Write every message in the language the person is writing in.** If they have typed nothing
@@ -360,6 +366,11 @@ Higgsfield's `video_deflicker` **before** slicing.
 
 Copy `web/scroll_frames.js`. It draws to `<canvas>` — never swap `<img src>`, which
 re-decodes and flashes.
+
+If the page has to open straight from disk by double-click, copy `web/scroll_frames_standalone.js`
+instead: it is a plain script rather than an ES module, with the manifest inlined into the page,
+because `file://` forbids both modules and `fetch`. Hand someone an `index.html` built on the
+module version and it silently shows nothing until a server is running.
 
 It loads **progressively and in parallel**: every eighth frame across the whole run first,
 then every fourth, then every second, then the rest, eight requests in flight. And `draw`
