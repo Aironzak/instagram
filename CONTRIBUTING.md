@@ -1,6 +1,6 @@
 # Как дорабатывать roomwalk
 
-*[гайд по-русски](README.ru.md) · [English README](README.md)*
+*[README по-русски](README.md) · [In English](README.en.md)*
 
 Плагин почти целиком состоит из прозы. Код здесь — семь маленьких утилит на Python и
 один движок скролла; всё остальное — два `SKILL.md`, которые читает Claude и по которым

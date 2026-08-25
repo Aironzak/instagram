@@ -1,9 +1,9 @@
 # roomwalk
 
-*[Гайд по-русски →](README.ru.md) · [Contributing](CONTRIBUTING.md)*
+*[In English](README.en.md) · [как дорабатывать](CONTRIBUTING.md)*
 
-**Что это.** Плагин для Claude Code. Строит скролл-шапку для сайта бизнеса: камера идёт по
-одному сгенерированному помещению, останавливается у каждой вещи, которую бизнес продаёт,
+**Что это.** Плагин для Claude Code. Строит сайту скролл-шапку: камера идёт по одному
+сгенерированному помещению, останавливается у каждой вещи, которую бизнес продаёт,
 и на каждой остановке всплывают его собственные настоящие фотографии.
 
 **Что нужно:** Claude Code, Python 3 и аккаунт Higgsfield с кредитами. Генерация платная —
@@ -16,75 +16,45 @@ claude plugin marketplace add Aironzak/instagram
 claude plugin install roomwalk@roomwalk
 ```
 
-Дальше `/roomwalk:connect` — напечатает ссылку для входа в Higgsfield, — перезапуск Claude Code,
-и `/roomwalk:start`.
+Дальше `/roomwalk:connect` — напечатает ссылку для входа в Higgsfield, — перезапуск
+Claude Code, и `/roomwalk:start`.
 
-**Two scroll-driven heroes. Pick by whether the offer is a place or a thing.**
+Плагин для Claude Code, который делает сайту героя, листающегося скроллом: страница
+не проигрывает видео, а **промотывает его кадры под колесо мыши** — как на страницах
+Apple. Видео генерится через Higgsfield, режется на кадры локально и скрабится на
+канвасе.
 
-**`roomwalk`** — send it your website. It reads the site, proposes a walk through one
-generated space with a stop at each thing you sell, and builds it.
-
-**`exploded`** — one product on pure black that comes apart as you scroll. A single unbroken
-shot: assembled at the top, floating in pieces at the bottom. **No joins at all**, because
-there is only ever one segment — which removes the failure mode that costs the most time in a
-walk.
-
----
-
-## Which one
+Внутри два разных героя. Выбор между ними — не вопрос вкуса, а вопрос того, что
+именно вы продаёте.
 
 | | `roomwalk` | `exploded` |
 | --- | --- | --- |
-| The offer is | a range, in a place | one object |
-| Fits | joinery, clinic, restaurant, gym, atelier, detailing, florist | watch, bottle, sneaker, chair, tool, jar, lamp |
-| Segments | 4–6, joined | **one**, played forward then back |
-| Seams to fix | yes, and they are the hard part | none |
-| Ground | a lit interior | pure black, so the hero has no edge |
-| Draft cost | 60–80 credits | 25 credits (65 for the 1080p final) |
+| Предложение — это | ассортимент, в помещении | один предмет |
+| Кому | столярка, клиника, ресторан, зал, ателье, детейлинг, цветы | часы, флакон, кроссовок, стул, инструмент, банка, лампа |
+| Сегментов видео | 4–6, склеенных | **один**, вперёд и обратно |
+| Швы | есть, и это самое трудное | нет вообще |
+| Фон | освещённый интерьер | чистый чёрный, поэтому у героя нет края |
+| Черновик | 60–80 кредитов | 25 кредитов (финал 1080p — 65) |
 
-In `roomwalk` the generated space is the **stage** and your own photographs are the **proof**,
-surfacing at the stop that matches their category — nobody is shown a rendered thing and told
-it is yours. In `exploded` the object must be **your** product photograph; the explosion is
-generated from it, never the product itself.
-
-Purely digital businesses are the wrong fit for both, and the skills say so.
+Чисто цифровому бизнесу (приложение, SaaS, инфопродукт) не подходит ни то, ни другое —
+скиллы об этом честно говорят и предлагают не делать.
 
 ---
 
-## Install
+## Установка — одна вставка
 
-Paste this into Claude Code. That is the whole setup.
+Скопируйте это в Claude Code целиком, одним сообщением:
 
 > Поставь плагин roomwalk: `claude plugin marketplace add Aironzak/instagram`, потом
 > `claude plugin install roomwalk@roomwalk`. Затем подключи Higgsfield — запусти в фоне
 > `connect_higgsfield.py` из плагина и дай мне ссылку для входа. После этого начни
 > roomwalk и спроси у меня ссылку на сайт.
 
-It installs itself, hands you a Higgsfield sign-in link, and then asks one question:
+Он поставит себя сам, выдаст ссылку для входа в Higgsfield и задаст один вопрос.
+После входа Claude Code нужно один раз перезапустить, чтобы подтянулись инструменты
+Higgsfield.
 
-> *Пришлите ссылку на сайт мастерской.*
-
-Send the link. It reads the site — categories, how many photographs sit behind each,
-prices, the line they repeat about themselves — and comes back with a plan and a price:
-
-> Посмотрел сайт. Мастерская делает столешницы (155 фото), подоконники (118), столы (55),
-> шкафы (32) — всего 618 работ. Есть калькулятор с настоящими ценами: от 14 300 ₽/м².
-> С 2003 года, рейтинг 5,0.
->
-> Предлагаю проход по одной комнате: столешница → подоконник → откос → стол → шкаф,
-> в конце шкаф открывается. На каждой остановке всплывают ваши настоящие фотографии.
->
-> Черновик 480p — около 70 кредитов, минут двадцать. Делаем так?
-
-You say yes. It builds.
-
-If the site can't be read, it says so and asks for two things instead: what the shop
-makes, and a few photographs of finished work. It will not guess the business from a
-domain name, and it will not build without photographs.
-
-Restart Claude Code once after the sign-in so the Higgsfield tools load.
-
-Prefer it by hand:
+Руками, если так привычнее:
 
 ```
 /plugin marketplace add Aironzak/instagram
@@ -93,169 +63,188 @@ Prefer it by hand:
 /roomwalk:start
 ```
 
+### Про коннектор отдельно
+
+`claude mcp login higgsfield` **не работает** и работать не будет: в метаданных
+Higgsfield заявлен `issuer: https://mcp.higgsfield.ai`, а редирект приносит
+`iss=https://clerk.higgsfield.ai` от их же Clerk. Claude Code это справедливо
+отвергает по RFC 9207, и флага отключить проверку нет. Их device-code сервер
+`fnf-device-auth.higgsfield.ai` отдаёт 404 на всех адресах, так что и этот путь мёртв.
+
+`/roomwalk:connect` обходит это: тот же authorization-code + PKCE, та же проверка
+`state`, пропускается только сравнение `iss` — защита от подмены, которая имеет смысл,
+когда клиент разговаривает с несколькими серверами, а здесь он ровно один и взят из
+метаданных самого Higgsfield. Токен пишется в конфиг MCP статическим заголовком,
+поэтому со временем протухает: `--refresh` обновляет без нового входа, `--status`
+показывает, что настроено.
+
+Альтернатива без скрипта — добавить `https://mcp.higgsfield.ai/mcp` через интерфейс
+коннекторов на claude.ai. Работает так же.
+
 ---
 
-## What you need
+## Что нужно иметь
 
 | | |
 | --- | --- |
-| **Higgsfield MCP** | Add `https://mcp.higgsfield.ai/mcp` through the connector UI at claude.ai. **Not** via `claude mcp login` — see below. |
-| **Python 3** | `python3 -m pip install --user pillow numpy imageio-ffmpeg`. Runs on **macOS, Windows and Linux**; `imageio-ffmpeg` carries its own ffmpeg, so nothing is installed system-wide. |
-| **Real photographs** | Your own — pulled off your site automatically. Without them there is no proof layer. |
-| **Credits** | A five-stop draft runs about 60–80 credits at 480p. |
-
-### The connector, specifically
-
-`claude mcp login higgsfield` always fails with *"Issuer mismatch in authorization
-response (RFC 9207)"*. Higgsfield's metadata declares `issuer: https://mcp.higgsfield.ai`
-while the redirect carries `iss=https://clerk.higgsfield.ai` from their upstream Clerk.
-Claude Code rejects that correctly and there is no flag to disable the check. Their
-advertised device-code server, `fnf-device-auth.higgsfield.ai`, returns 404 on every
-endpoint, so that route is dead as well.
-
-`/roomwalk:connect` works around it. It runs the same authorization-code + PKCE flow with
-the same `state` check and skips only the `iss` comparison — a mix-up protection that
-matters when a client talks to several authorization servers, where here there is exactly
-one, taken from Higgsfield's own metadata. Then it writes the token into the user-scope
-MCP config as a static bearer header.
-
-Because the header is static, the token eventually expires. `--refresh` renews it without
-a new sign-in; `--status` reports what is configured. Adding the connector through the
-claude.ai UI also works if you would rather click than run a script.
+| **Higgsfield** | аккаунт с кредитами и подключённый коннектор |
+| **Python 3** | `python3 -m pip install --user pillow numpy imageio-ffmpeg`. Работает на **macOS, Windows и Linux**; `imageio-ffmpeg` приносит свой ffmpeg, в систему ставить нечего |
+| **Свои фотографии** | настоящие снимки работ. Без них слоя доказательства нет, и скилл откажется собирать |
+| **Кредиты** | черновик прохода на пять остановок — 60–80, разборка — около 10 |
 
 ---
 
-## What's inside
+## Как проходит `roomwalk`
 
-```
-skills/roomwalk/
-  SKILL.md                    the pipeline, the rules, the failure modes
-  tools/extract_frames.py     video → numbered frames + manifest (imageio-ffmpeg)
-  tools/measure_seams.py      how visible is each join, in numbers
-  tools/measure_flicker.py    per-frame brightness jitter and loop-seam distance
-  tools/blend_seam.py         soften a mild join without spending credits
-  tools/preview_hero.py       composite a frame with gradients + caption to PNG
-  tools/brightness_curve.py   chart exposure drift per frame and per segment
-  tools/stabilise_exposure.py pull every frame to a common median
-  tools/_frames.py            shared frame reading and luma maths
-  tools/*.swift               the original macOS-only versions, kept for reference
-  tools/connect_higgsfield.py Higgsfield sign-in that works around the RFC 9207 bug
-  web/scroll_frames.js        canvas scroll engine with a pacing timeline
-skills/exploded/
-  SKILL.md                    one object on black, one shot, no joins
-commands/
-  connect.md                  /roomwalk:connect — Higgsfield sign-in
-  start.md                    /roomwalk:start — ask for the link, read the site, propose
-  walk.md                     /roomwalk:walk — go straight to building the walk
-  explode.md                  /roomwalk:explode — build the product hero
-```
+Вы даёте ссылку на сайт. Он его читает — категории, сколько фотографий за каждой,
+цены, фразу, которую про себя повторяют, — и возвращается с планом и ценой:
 
----
+> Посмотрел сайт. Мастерская делает столешницы (155 фото), подоконники (118), столы (55),
+> шкафы (32) — всего 618 работ. Есть калькулятор с настоящими ценами: от 14 300 ₽/м².
+>
+> Предлагаю проход по одной комнате: столешница → подоконник → откос → стол → шкаф,
+> в конце шкаф открывается. На каждой остановке всплывают ваши настоящие фотографии.
+>
+> Черновик 480p — около 70 кредитов, минут двадцать. Делаем так?
 
-## What space you get
+Вы говорите «да» — он собирает. Если сайт прочитать не удалось, он так и скажет и
+попросит два предмета взамен: что мастерская делает и несколько фотографий готовых
+работ. Гадать бизнес по доменному имени он не станет и без фотографий строить не будет.
 
-| Business | The space | Typical stops |
-| --- | --- | --- |
-| Joinery, furniture | one room of a house | worktop · sill · table · cabinet fronts |
-| Perfumery | a boutique | shelf of flacons · tester bar · gift packaging · counter |
-| Cosmetology, dental | reception and one treatment room | reception · chair · product shelf · quiet corner |
-| Restaurant, bakery | dining room to pass | window seat · counter display · open pass · bar |
-| Car detailing | one workshop bay | lift · polishing bay · wheel wall · finished car |
-| Flowers, ceramics | a studio | workbench · shelving · packing table · window |
-| Fitness, spa | one hall plus a corner | equipment row · weights · treatment room · lockers |
-| Clothing, tailoring | atelier or shop floor | fabric rolls · mannequin · fitting mirror · rail |
+### Три правила, от которых зависит, получится ли вообще
 
----
+**Запирайте оба конца.** У каждого перехода должны быть и `start_image`, и `end_image`.
+Без якоря на выходе модель придумывает прибытие сама, и вылезают две классические беды:
+в кадр вырастает предмет, которого не было, и камера разворачивается назад искать объект.
 
-## The three rules that decide whether it works
+**Цепляйтесь за настоящий хвост.** Модель почти никогда не приходит ровно в якорь.
+Следующий сегмент надо начинать с **фактического последнего кадра** предыдущего, а не с
+чистенького якоря — тогда стык непрерывен по построению, а `end_image` всё так же
+управляет прибытием.
 
-**Lock both ends.** Every transition gets a `start_image` *and* an `end_image`. Without
-the end anchor the model invents the arrival, and you get the two classic failures: an
-object grows into frame that was not there before, and the camera reverses to find its
-subject.
+**Одна комната.** Замерено на живой сборке: переходы внутри комнаты дают на стыке
+1,07–1,86× от обычной покадровой разницы — не видно. Три перехода, уходившие в дверь
+во вторую комнату, порвались на 6,3×, 11,4× и 8,4×. Если категорий больше, чем помещается
+в одну комнату, лишние идут в каталог под героем, а не в проход.
 
-**Chain from the real tail.** The model rarely lands exactly on the anchor. Start the
-next segment from the previous segment's *actual* last frame, not the pristine anchor —
-the join becomes continuous by construction while `end_image` still controls arrival.
+### Три вещи, от которых зависит, гладко ли ощущается
 
-**One room.** Measured on a real build: transitions inside one room joined at 1.07–1.86×
-the normal frame-to-frame change, invisible. The three that walked through a doorway into
-a second room tore at 6.3×, 11.4× and 8.4×. If the brief needs more categories than one
-room holds, put the extras in the catalogue below the hero.
+**Выравнивайте экспозицию.** Модель по ходу переосвещает сцену — замеренный дрейф по
+пяти сегментам был +15, +15, +1, −11, −37. На скорости воспроизведения незаметно, а под
+медленным скроллом читается как «солнце появилось и ушло». `stabilise_exposure` приводит
+это к +1,7, +0,8, +1,6, −0,7, −5,4, причём ограничитель оставляет по-настоящему тёмные
+места тёмными.
 
----
+**Давайте движению больше скролла, чем остановкам.** Интуиция здесь врёт наоборот.
+Задержка 1 против движения 3 — это 30 % скролла на остановки и 70 % на ход. Сделанное
+ровно наоборот заказчик первым делом назвал «залипающим».
 
-## Three things that decide whether it feels smooth
+**Грузите прогрессивно и параллельно.** Сначала каждый восьмой кадр по всей длине, потом
+плотнее, восемь запросов в полёте — и рисуйте ближайший загруженный кадр вместо пустоты.
+Последовательный загрузчик означает, что первую минуту скролл попадает в неприехавшие
+кадры и страница выглядит сломанной.
 
-**Stabilise the exposure.** The model relights the scene as it goes — measured drift across
-five segments was +15, +15, +1, −11, −37. Invisible at playback speed; scrubbed slowly it
-reads as *"the sun appears and then goes away"*. `stabilise_exposure` pulls it to +1.7, +0.8,
-+1.6, −0.7, −5.4, with the clamp keeping genuinely dark places dark.
+**Не считайте нулевую ширину телефоном.** Пока страница не разложена, `innerWidth` равен
+нулю, и `matchMedia('(max-width: 768px)')` отвечает «да» — на десктопе движок брал каждый
+второй кадр, а секция выходила вдвое короче. Ждать раскладку через `requestAnimationFrame`
+нельзя: в скрытой вкладке он не вызывается вообще, и ожидание повисает навсегда. Правильно —
+считать неизвестную ширину неизвестностью и по умолчанию идти полным набором.
 
-**Give travel more scroll than the holds.** The instinct is backwards. Hold 1 against travel
-3 puts 30 % of the scroll into the stops and 70 % into moving. Doing it the other way round
-was the first thing a client called sticky.
+**Не прячьте текст ради появлялки без страховки.** Если наблюдатель не отработает — вкладку
+свернули, браузер придушил таймеры, скрипт споткнулся, — читатель останется перед пустым
+экраном. Через две с половиной секунды показывайте всё, что ещё скрыто, чем бы это ни было
+вызвано.
 
-**Load progressively and in parallel.** Every eighth frame across the whole run first, then
-denser, eight requests in flight — and draw the nearest loaded frame rather than nothing.
-A sequential loader means the first minute of scrolling lands on frames that have not
-arrived and the page reads as broken.
+### Два числа
 
-**Never read an unknown viewport as mobile.** Before layout, `innerWidth` is 0 and
-`matchMedia('(max-width: 768px)')` answers yes — on desktop that halved the frame set and
-halved the section height. Waiting for layout via `requestAnimationFrame` is worse: in a
-hidden tab it never fires and the wait hangs forever. Treat an unknown width as unknown and
-default to the full set.
+**120 кадров на 8-секундный сегмент.** Шестьдесят — это 7,5 к/с, и при скрабе видно ступеньки.
 
-**Don't hide copy for a reveal without a safety net.** If the observer doesn't run — tab
-minimised, timers throttled, a script that threw earlier — the reader is left with a blank
-screen. Reveal everything still hidden after 2.5 s, whatever the cause.
+**9–10 пикселей скролла на кадр.** Высота секции в экранах ≈ `(кадров × 10 / высота окна) + 1`.
+Шестьсот кадров при окне 833 px — примерно 8 экранов. Те же кадры, растянутые на 15 экранов,
+дают 28 px на кадр и заметно дёргаются.
+
+Ритм не снимается камерой — он живёт в опции `timeline`. Генерите ровный проезд, а темп
+задаёте пятью числами. Задержка 3 против хода 2 даёт примерно четырёхкратную разницу
+скорости, и перенастройка не стоит новой генерации.
 
 ---
 
-## Two numbers to hit
+## Как проходит `exploded`
 
-**120 frames per 8-second segment.** Sixty samples at 7.5 fps and scrubbing shows steps.
+Предмет висит собранным на чёрном. Вы скроллите — он разбирается по своим осям и
+повисает деталями в пустоте.
 
-**9–10 px of scroll per frame.** Section height in screens ≈ `(frames × 10 / viewport) + 1`.
-Six hundred frames on an 833 px viewport is about 8 screens. The same frames stretched
-over 15 screens gives 28 px per frame and visibly steps.
+Это одна-единственная генерация, у которой заперты оба конца: первый кадр — собрано,
+последний — разобрано. Мерить и чинить нечего, потому что сегмент один. Отсюда и цена
+в двадцать пять кредитов за черновик вместо семидесяти.
 
-Pacing is not shot — it lives in the `timeline` option. Generate an even camera move,
-then set the rhythm in five numbers. Dwell 3 against travel 2 gives roughly a fourfold
-speed difference, and retuning never costs a regeneration.
+Чёрный фон — не стилистическое решение. У героя из-за него **нет края**: проход
+упирается в жёсткую линию, где кончается съёмка и начинается страница, и эта линия
+читается как стена. Здесь кадры растворяются в фоне, потому что фон тот же. Плюс большие
+плоские чёрные поля почти ничего не стоят в JPEG.
 
----
+Проход идёт вперёд и обратно: `pingpong` подставляет тот же набор кадров задом наперёд,
+предмет собирается обратно, сценарий удлиняется вдвое даром, и шва на развороте не бывает
+по построению. Заканчивать страницу горкой деталей — странная нота, собранный предмет лучше.
 
-## Weight, said out loud
+Три вещи, которые решают результат:
 
-Six hundred frames at 864 px JPEG is about 32 MB. Fine for a prototype, heavy for
-production. WebP or AVIF takes 30–50 % off; narrower frames stretched by CSS take more;
-a sprite atlas collapses the request count. Or scrub a real `<video>` — a 30-second 1080p
-H.264 is roughly 4 MB, six times lighter, at the cost of seek precision in Safari.
+**Перечисляйте детали поимённо.** «Разбери предмет» даёт осколки. «Безель, стекло,
+циферблат, платина механизма, задняя крышка» даёт взрыв-чертёж. Для столешницы —
+ламели, клеевые швы, шпонки, профиль кромки, слой покрытия.
 
----
+**Одна остановка — на пике.** С обратным ходом `timeline` как раз нужен: одна задержка на
+полностью разобранном состоянии и больше нигде. Ход 9 против паузы 2,5; перевес в сторону
+паузы заказчик первым делом называет залипанием.
 
-## Honesty, and where it becomes a hard stop
+**Текст живёт внутри разборки, а не под ней.** Каждый абзац привязан к кадрам, на которых
+его деталь отделяется, и набран крупно: имя 44–48 px, текст 19–21 px. Тот же текст списком
+под героем превращает страницу в ролик с титрами — это первое, что было сказано про
+первую версию. Место под колонку добывается сдвигом кадра: замерьте, до какой доли ширины
+доходит предмет на всех кадрах, и сдвиньте кадр так, чтобы колонка осталась свободной.
+На чёрном сдвиг ничего не стоит — едет пустота.
 
-The space is generated. Your photographs are the proof layer, and the footer says plainly
-that the interior is styling rather than a photograph of your premises.
-
-**It generates the environment, never the outcome.** A room, a shelf, a counter, a chair,
-light on a surface — yes. A result you are selling — no:
-
-- **No faces, no bodies, no skin.** For anything cosmetic, medical, dental, fitness or
-  aesthetic this is absolute. A generated "after" is a fabricated clinical claim, and
-  advertising one is illegal in most jurisdictions regardless of a disclaimer.
-- No before-and-after of any kind.
-- No generated food presented as your menu.
-- No generated products carrying your branding.
-- No certificates, diplomas, licences or awards in frame.
-
-For regulated businesses the hero shows the premises only, and every claim and result on
-the page comes from your own material. A visitor who books a procedure because of a
-rendered face is a worse outcome than no hero at all.
+**Один слом подложки после героя.** Одна светлая секция делает то, чего не делает ни одна
+рамка: читателю становится очевидно, что это сайт, а не фильм.
 
 ---
 
-MIT.
+## Честность, и где она становится запретом
+
+Помещение сгенерировано. Ваши фотографии — слой доказательства, и в подвале прямо
+написано, что интерьер это оформление, а не снимок вашего цеха.
+
+**Генерится обстановка, но никогда не результат.** Комната, полка, стойка, стул, свет
+на поверхности — да. То, что вы продаёте, — нет:
+
+- **Ни лиц, ни тел, ни кожи.** Для косметологии, медицины, стоматологии, фитнеса и
+  эстетики это абсолютно. Сгенерированное «после» — сфабрикованное клиническое
+  утверждение, и его реклама незаконна в большинстве юрисдикций независимо от дисклеймера.
+- Никаких «до и после» в любом виде.
+- Никакой сгенерированной еды под видом вашего меню.
+- Никаких сгенерированных товаров с вашим брендом.
+- Никаких сертификатов, дипломов, лицензий и наград в кадре.
+
+Для `exploded` риск в самом предмете: если товар реальный и его можно купить, базовый
+снимок должен быть **вашим**. Сгенерировать похожий и взорвать его — искажение: пропорции,
+отделка, количество деталей окажутся не теми, а страница делает утверждение о существующей
+вещи. Чужие бренды не генерятся вообще, даже для демо. Характеристики в таблице — только
+из ваших данных.
+
+Для регулируемого бизнеса герой показывает помещение и ничего больше, а все заявления и
+результаты на странице берутся из ваших собственных материалов. Посетитель, записавшийся
+на процедуру из-за отрисованного лица, — исход хуже, чем отсутствие героя.
+
+---
+
+## Вес, вслух
+
+Шестьсот кадров JPEG шириной 864 px — примерно 32 МБ. Для прототипа нормально, для
+продакшена тяжело. WebP или AVIF снимают 30–50 %, более узкие кадры, растянутые
+средствами CSS, — ещё больше, спрайт-атлас схлопывает количество запросов. Либо скрабьте
+настоящий `<video>`: 30 секунд 1080p H.264 — около 4 МБ, вшестеро легче, ценой точности
+перемотки в Safari.
+
+---
+
+MIT. Делайте что хотите, ссылка на источник приветствуется.
