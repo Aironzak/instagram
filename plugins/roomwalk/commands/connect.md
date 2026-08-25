@@ -8,6 +8,9 @@ Run the connector script that ships with the roomwalk skill:
 python3 "${CLAUDE_PLUGIN_ROOT}/skills/roomwalk/tools/connect_higgsfield.py"
 ```
 
+On Windows `python3` usually does not exist: use `py -3` or `python` instead — whichever
+answers to `--version`.
+
 Run it in the background, then read its output and give the user the sign-in
 link it prints. The script waits up to thirty minutes for them to finish, then
 writes the token into the user-scope MCP config by itself.

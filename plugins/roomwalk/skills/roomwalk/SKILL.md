@@ -68,7 +68,19 @@ several different things in the place they belong.
 
    `--refresh` renews an expired token without a new sign-in; `--status` reports what is
    configured.
-2. **Python 3 with three packages.** The frame tools run on macOS, Windows and Linux alike:
+2. **Python 3 with three packages.** The frame tools run on macOS, Windows and Linux alike.
+
+   **First work out how Python is called on this machine, then use that everywhere.** On macOS
+   and Linux it is `python3`. On Windows that name usually does not exist — the official
+   installer gives `python` and `py`, and Windows ships a fake `python3` that opens the Microsoft
+   Store and exits. Check once:
+
+   ```bash
+   python3 --version || python --version || py -3 --version
+   ```
+
+   Take the one that answers with a version and use it for every command below. **Throughout this
+   file `python3` is shorthand for that launcher** — on Windows read every `python3` as `py -3`.
 
    ```bash
    python3 -m pip install --user pillow numpy imageio-ffmpeg

@@ -52,6 +52,9 @@ JPEG, so a 700-frame sequence lands much lighter than the same count of a lit in
    see the `roomwalk` skill for why.
 2. **Python 3**, for the frame tools: `python3 -m pip install --user pillow numpy imageio-ffmpeg`.
    Works on macOS, Windows and Linux; `imageio-ffmpeg` carries its own ffmpeg.
+   On Windows `python3` usually does not exist — check with
+   `python3 --version || python --version || py -3 --version` and use whichever answers.
+   Every `python3` below means that launcher.
 3. **A photograph of the real product**, if the product is real. See § Honesty.
 4. **Credits.** Measured on `seedance_2_5`, 10 seconds, both ends anchored: **25 credits at
    480p, 65 at 1080p**. Always run the draft first — the 480p tells you whether the motion is
