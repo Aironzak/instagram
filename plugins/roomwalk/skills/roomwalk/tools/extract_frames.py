@@ -71,9 +71,13 @@ def main(argv):
     print(f"исходник: {w}x{h}, {duration:.2f} с, {fps:.2f} fps")
 
     # Сколько кадров в ролике на самом деле — узнаём по ходу чтения, а не из метаданных:
-    # они врут чаще, чем хотелось бы.
-    frames = list(reader)
-    total = len(frames)
+    # они врут чаще, чем хотелось бы. Считаем отдельным проходом, ничего не накапливая:
+    # держать весь поток в списке нельзя. Расход тогда задаёт не --count, а длина
+    # ролика: 14 секунд 1080p при 60 fps — это 864 кадра по 5.9 МБ, то есть 5 ГБ.
+    # На машине с 8 ГБ такой прогон выносит не только себя.
+    total = 0
+    for _ in reader:
+        total += 1
     if total == 0:
         fail("в видео не нашлось кадров")
 
@@ -85,15 +89,30 @@ def main(argv):
     out_h = max(1, round(h * out_w / w))
     quality = max(1, min(100, round(opts["quality"] * 100)))
 
-    written = 0
+    # Какой кадр под каким номером сохранить. Список, а не одно число: при count,
+    # близком к длине ролика, округление может дать один индекс дважды — прежний
+    # код писал в этом случае два файла, поведение сохраняем.
+    wanted = {}
     for n, idx in enumerate(picks):
-        arr = np.frombuffer(frames[idx], dtype=np.uint8).reshape(h, w, 3)
+        wanted.setdefault(idx, []).append(n)
+
+    # Второй проход — тоже сплошной, без перемотки (почему так — см. шапку файла).
+    # В памяти живёт ровно один кадр: он сразу уходит в JPEG и забывается.
+    reader = imageio_ffmpeg.read_frames(src)
+    next(reader)
+    written = 0
+    for idx, frame in enumerate(reader):
+        names = wanted.get(idx)
+        if not names:
+            continue
+        arr = np.frombuffer(frame, dtype=np.uint8).reshape(h, w, 3)
         im = Image.fromarray(arr)
         if (out_w, out_h) != (w, h):
             im = im.resize((out_w, out_h), Image.LANCZOS)
-        im.save(os.path.join(out_dir, f"frame_{n:04d}.jpg"), "JPEG",
-                quality=quality, optimize=True)
-        written += 1
+        for n in names:
+            im.save(os.path.join(out_dir, f"frame_{n:04d}.jpg"), "JPEG",
+                    quality=quality, optimize=True)
+            written += 1
 
     manifest = {
         "frames": written,
