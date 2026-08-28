@@ -9,14 +9,18 @@ cols = int(sys.argv[3]) if len(sys.argv) > 3 else 3
 files = sorted(src.glob('frame_*.jpg'))
 if not files: sys.exit('кадров нет')
 tw = 620
-ims = [Image.open(f) for f in files]
-th = round(tw * ims[0].height / ims[0].width)
-rows = math.ceil(len(ims) / cols)
+# Кадры открываем по одному и сразу закрываем. Держать их списком нельзя:
+# Image.open ленив, но resize ниже заставляет PIL загрузить полный растр и
+# оставить его в объекте — на 220 кадрах это замеренные 1.6 ГБ.
+with Image.open(files[0]) as probe:
+    th = round(tw * probe.height / probe.width)
+rows = math.ceil(len(files) / cols)
 sheet = Image.new('RGB', (cols * tw, rows * th), (0, 0, 0))
 d = ImageDraw.Draw(sheet)
-for i, im in enumerate(ims):
+for i, f in enumerate(files):
     x, y = (i % cols) * tw, (i // cols) * th
-    sheet.paste(im.resize((tw, th), Image.LANCZOS), (x, y))
-    d.text((x + 10, y + 8), f'{i}  {files[i].stem}', fill=(255, 190, 90))
+    with Image.open(f) as im:
+        sheet.paste(im.resize((tw, th), Image.LANCZOS), (x, y))
+    d.text((x + 10, y + 8), f'{i}  {f.stem}', fill=(255, 190, 90))
 sheet.save(out, quality=88)
-print(f'{out}: {len(ims)} кадров, {sheet.width}x{sheet.height}')
+print(f'{out}: {len(files)} кадров, {sheet.width}x{sheet.height}')
